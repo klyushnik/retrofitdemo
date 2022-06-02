@@ -9,6 +9,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,13 +66,19 @@ class MainActivity : AppCompatActivity() {
             authorText.text.toString(),
             publisherText.text.toString())
             .toJson()
-        val jArray = JSONArray()
+        /*val jArray = JSONArray()
         jArray.put(book)
         for(i in adapter.data){
             jArray.put(i.toJson())
         }
 
-        println(jArray.toString())
+        println(jArray.toString())*/
+
+        val string = book.toString()
+        val type = MediaType.parse("application/json; charset=utf-8")
+        val requestBody = RequestBody.create(type, string)
+
+        vm.createBooks(requestBody)
     }
 
     fun refresh(view : View){
