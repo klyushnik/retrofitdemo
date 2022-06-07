@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
+import io.reactivex.rxjava3.core.Observable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,6 +18,8 @@ class MyViewModel : ViewModel(){
 
     var data = MutableLiveData<List<Book>>()
 
+    var data2 : Observable<List<Book>>? = null
+
     var job : Job? = null
 
     fun getAllBooks(){
@@ -25,6 +28,10 @@ class MyViewModel : ViewModel(){
             if(res.isSuccessful){}
                 data.postValue(res.body())
         }
+    }
+
+    fun getApiBooks() : Observable<List<Book>>{
+        return repo.getApiBooks()
     }
 
     fun createBooks(requestBody: RequestBody) {

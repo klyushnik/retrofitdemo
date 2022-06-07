@@ -9,6 +9,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import org.json.JSONArray
@@ -47,13 +52,53 @@ class MainActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        vm.data.observe(this){
+        /*vm.data.observe(this){
             data.clear()
             data.addAll(it)
             adapter.notifyDataSetChanged()
         }
 
-        vm.getAllBooks()
+        vm.getAllBooks()*/
+/*
+        vm.getApiBooks()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeBy (
+                onNext = {
+                    data.clear()
+                    data.addAll(it)
+                    adapter.notifyDataSetChanged()
+                },
+                onError = {
+                    println("onError: ")
+                    println(it)
+                }
+            )
+        */
+
+
+        var observer = object: Observer<List<Book>> {
+            override fun onSubscribe(p0: Disposable) {
+                println("subscribed")
+            }
+
+            override fun onNext(p0: List<Book>) {
+                data.clear()
+                data.addAll(p0)
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onError(p0: Throwable) {
+                println("error")
+            }
+
+            override fun onComplete() {
+                println("done")
+            }
+        }
+
+        vm.getApiBooks().subscribe(observer)
+
 
     }
 
