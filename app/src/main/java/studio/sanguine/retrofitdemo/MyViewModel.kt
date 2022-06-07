@@ -22,7 +22,7 @@ class MyViewModel : ViewModel(){
     fun getAllBooks(){
         job = CoroutineScope(Dispatchers.IO).launch{
             val res = repo.getAllBooks()
-            if(res.isSuccessful)
+            if(res.isSuccessful){}
                 data.postValue(res.body())
         }
     }

@@ -59,26 +59,27 @@ class MainActivity : AppCompatActivity() {
 
 
     fun addToList(view: View){
-        //create a json object
+        /*//create a json object
         val book = Book(
+            0,
             titleText.text.toString(),
             subtitleText.text.toString(),
             authorText.text.toString(),
             publisherText.text.toString())
             .toJson()
-        /*val jArray = JSONArray()
+        *//*val jArray = JSONArray()
         jArray.put(book)
         for(i in adapter.data){
             jArray.put(i.toJson())
         }
 
-        println(jArray.toString())*/
+        println(jArray.toString())*//*
 
         val string = book.toString()
         val type = MediaType.parse("application/json; charset=utf-8")
         val requestBody = RequestBody.create(type, string)
 
-        vm.createBooks(requestBody)
+        vm.createBooks(requestBody)*/
     }
 
     fun refresh(view : View){

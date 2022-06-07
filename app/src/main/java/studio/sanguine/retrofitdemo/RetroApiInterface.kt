@@ -22,7 +22,7 @@ interface RetroApiInterface {
 
     //singleton
     companion object {
-        val BASE_URL = "https://klyushnik.github.io/"
+        val BASE_URL = "https://thapasabiran.github.io/Data/"
         fun create() : RetroApiInterface {
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())

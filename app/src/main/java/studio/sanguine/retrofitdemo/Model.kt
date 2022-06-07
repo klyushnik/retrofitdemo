@@ -4,6 +4,7 @@ import org.json.JSONObject
 import java.io.Serializable
 
 data class Book(
+                var id: Int,
                 var title: String,
                 var subtitle: String,
                 var author: String,
