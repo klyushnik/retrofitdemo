@@ -1,6 +1,6 @@
 package studio.sanguine.retrofitdemo
 
-import org.junit.Test
+import org.junit.*
 
 import org.junit.Assert.*
 
@@ -13,5 +13,25 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         assertEquals(4, 2 + 2)
+    }
+
+    @Before
+    fun addition_isCorrect_before(){
+
+    }
+
+    @BeforeClass
+    fun b4Class(){
+
+    }
+
+    @After
+    fun atAfter(){
+
+    }
+
+    @AfterClass
+    fun afterClass(){
+
     }
 }
